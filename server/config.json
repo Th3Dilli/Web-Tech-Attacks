@@ -1,0 +1,13 @@
+{
+    "database": {
+        "host": "localhost",
+        "port": "3306",
+        "user": "wt_attacks_root",
+        "password": "pass1234",
+        "db": "wt_attacks"
+    },
+    "server": {
+        "host": "localhost",
+        "port": 3000
+    }
+}
