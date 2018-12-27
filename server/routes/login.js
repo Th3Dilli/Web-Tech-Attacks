@@ -13,6 +13,9 @@ router.post('/', (req, res) => {
 
     //  ' or '1' ='1
     let sql = "SELECT * FROM users WHERE username = '"+ username +"' AND password = '"+ password + "'";
+
+
+    
     console.log(sql);
     database.query(sql,
         (error, results, fields) =>
