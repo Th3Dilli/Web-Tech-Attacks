@@ -17,11 +17,10 @@
 
 
 create database if not exists wt_attacks;
+use wt_attacks;
 
-
-create user 'wt_attacks_root' identified by 'pass1234';
-grant all privileges on wt_attacks.* to 'wt_attacks_root'@'localhost';
-
+create user 'wt_attacks_root'@'localhost' identified by 'pass1234';
+grant all PRIVILEGES on wt_attacks.* to 'wt_attacks_root'@'localhost';
 --
 -- Table structure for table `users`
 --
