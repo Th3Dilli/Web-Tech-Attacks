@@ -23,7 +23,7 @@ create user 'wt_attacks_root'@'localhost' identified by 'pass1234';
 grant all PRIVILEGES on wt_attacks.* to 'wt_attacks_root'@'localhost';
 --
 -- Table structure for table `users`
---
+--ADD COLUMN `token` VARCHAR(45) NULL AFTER `password`;
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -32,6 +32,7 @@ CREATE TABLE `users` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `username` varchar(45) NOT NULL,
   `password` varchar(45) NOT NULL,
+  `token` VARCHAR(45) NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username_UNIQUE` (`username`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;

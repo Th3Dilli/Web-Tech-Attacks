@@ -12,8 +12,10 @@ app.use(bodyParser.json()); // support json encoded bodies
 
 
 const loginRoutes = require('./routes/login');
+const homeRoutes = require('./routes/home');
 
 app.use("/login", loginRoutes);
+app.use("/home", homeRoutes);
 
 
 // default route

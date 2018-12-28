@@ -3,8 +3,6 @@ const express = require('express');
 const router = express.Router();
 const getDb = require("../connectDB").getDb;
 
-
-
 router.post('/', (req, res) => {
     const database = getDb();
 
@@ -14,8 +12,6 @@ router.post('/', (req, res) => {
     //  ' or '1' ='1
     let sql = "SELECT * FROM users WHERE username = '"+ username +"' AND password = '"+ password + "'";
 
-
-    
     console.log(sql);
     database.query(sql,
         (error, results, fields) =>
@@ -24,7 +20,7 @@ router.post('/', (req, res) => {
             {
                 res.status(400).json(
                 {
-                    message: "error occured"
+                    message: "Error occured"
                 });
                 return;
             }
@@ -32,16 +28,19 @@ router.post('/', (req, res) => {
             {
                 res.status(401).json(
                 {
-                    message: "login failed"
+                    message: "Login failed"
                 });
                 return;
             }
             else
             {
+                let token = Math.floor(Math.random() * 10000);
+                database.query('UPDATE users SET token = ? WHERE username = ? AND password = ?',[token,username, password]);
                 res.status(200).json(
                 {
-                    message: "login ok",
-                    username : results
+                    //message: "Logged in as ",
+                    username : results[0].username,
+                    token : token
                 });
             }
         });
