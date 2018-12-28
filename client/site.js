@@ -2,7 +2,9 @@ let greeting = document.querySelector("#userGreeting");
 let loginForm = document.querySelector("#loginForm");
 let logoutForm = document.querySelector("#logoutForm");
 let loginMessage = document.querySelector("#loginMessage");
-
+let searchForm = document.querySelector("#searchForm");
+let searchBox = document.querySelector("#searchBox");
+let searchResult = document.querySelector("#searchResult"); 
 let username = document.querySelector("#username");
 let password = document.querySelector("#password"); 
 
@@ -90,6 +92,7 @@ function init()
         user = JSON.parse(cookieVar[1]);
         loginForm.style.display = 'none';
         logoutForm.style.display = 'block';
+        searchForm.style.display = 'block';
         greeting.innerHTML = "Logged in as " + user.username
         let token = JSON.parse(document.cookie.split("=")[1]).token;
         log("token : " + token)
@@ -106,7 +109,13 @@ function init()
     {
         loginForm.style.display = 'block';
         logoutForm.style.display = 'none';
+        searchForm.style.display = 'none';
     }
+}
+
+function search()
+{
+    searchResult.innerHTML = searchBox.value
 }
 
 init()
