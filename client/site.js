@@ -1,8 +1,8 @@
-let greeting = document.querySelector("#userGreeting");
-let loginForm = document.querySelector("#loginForm");
+let loginForm = document.querySelector("#logintForm");
 let logoutForm = document.querySelector("#logoutForm");
 let loginMessage = document.querySelector("#loginMessage");
 let searchForm = document.querySelector("#searchForm");
+let home = document.querySelector("#home");
 let searchBox = document.querySelector("#searchBox");
 let searchResult = document.querySelector("#searchResult"); 
 let username = document.querySelector("#username");
@@ -13,13 +13,6 @@ let config =
     userInfo : "wt_attacks_info"
 }
 
-let debug = true;
-
-function log(text) {
-    if(debug === true)
-    console.log(text)
-    
-}
 
 function createCookie(jsonData) {
     let now = new Date();
@@ -41,17 +34,15 @@ function login()
 {
     if(username.value === "")
     {
-        log("No valid username")
-        loginMessage.innerHTML ="No valid username"
+       alert("No valid username")
     }
     else if( password.value === "")
     {
-        log("No valid password")
-        loginMessage.innerHTML ="No valid password"
+        alert("No valid password")
     }
     else
     {
-        log("U: " + username.value + "\tPW: " + password.value)
+        console.log("U: " + username.value + "\tPW: " + password.value)
         
         fetch("http://localhost:3000/login",{
             method: "POST",
@@ -68,7 +59,6 @@ function login()
             {
                 console.log(jsonData);
                 createCookie(jsonData)
-                //loginMessage.innerHTML = "Logged in as " + jsonData.username
                 init()
             });
         
@@ -79,23 +69,47 @@ function logout()
 {
     deleteCookie();
     init();
+    document.getElementById("navbar").style.display = 'none';
+}
+
+function loginOk()
+{
+    logintForm.style.display = 'none';
+    logoutForm.style.display = 'block';
+    searchForm.style.display = 'none';
+    document.getElementById("homeNavE").classList.add('active');
+    document.getElementById("navbar").style.display = 'initial';
+}
+
+function searchNav()
+{
+    searchForm.style.display = 'block';
+    home.style.display = 'none';
+    document.getElementById("searchNavE").classList.add('active');
+    document.getElementById("homeNavE").classList.remove('active');
+}
+
+function homeNav()
+{
+    searchForm.style.display = 'none';
+    home.style.display = 'block';
+   document.getElementById("homeNavE").classList.add('active');
+    document.getElementById("searchNavE").classList.remove('active');
+
 }
 
 function init()
 {
     let cookie = document.cookie;
-    log(cookie)
+    console.log(cookie)
     if (cookie)
     {
         let cookieVar = cookie.split("=");
         cookieVar[0] = config.userInfo
         user = JSON.parse(cookieVar[1]);
-        loginForm.style.display = 'none';
-        logoutForm.style.display = 'block';
-        searchForm.style.display = 'block';
-        greeting.innerHTML = "Logged in as " + user.username
+        
         let token = JSON.parse(document.cookie.split("=")[1]).token;
-        log("token : " + token)
+        console.log("token : " + token)
 
         fetch("http://localhost:3000/home",{
         method: "GET",
@@ -104,20 +118,29 @@ function init()
                     "Authorization" : token
                 }
             })
+            .then(response => {
+                if(response.ok)
+                {
+                    loginOk()
+                }
+                else
+                {
+                    alert(response.statusText)
+                }
+            })
     }
     else
     {
         loginForm.style.display = 'block';
         logoutForm.style.display = 'none';
         searchForm.style.display = 'none';
+        document.getElementById("navbar").style.display = 'none';
     }
 }
 
 function search()
 {
-    searchResult.innerHTML = searchBox.value
+    searchResult.innerHTML = "Search result for " + searchBox.value
 }
 
 init()
-
-//JSON.parse(document.cookie.split("=")[1]).token

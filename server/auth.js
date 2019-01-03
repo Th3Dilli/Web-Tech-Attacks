@@ -9,7 +9,7 @@ module.exports = (req, res, next) => {
         console.log(token);
         if(error)
         {
-            res.status(401).json(
+            res.status(400).json(
             {
                 message: "error occured"
             });
@@ -22,7 +22,7 @@ module.exports = (req, res, next) => {
         }
         else
         {
-            res.status(400).json(
+            res.status(401).json(
             {
                 message: "Authentication failed"
             });
