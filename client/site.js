@@ -77,6 +77,7 @@ function loginOk()
     logintForm.style.display = 'none';
     logoutForm.style.display = 'block';
     searchForm.style.display = 'none';
+    home.style.display = 'block';
     document.getElementById("homeNavE").classList.add('active');
     document.getElementById("navbar").style.display = 'initial';
 }
@@ -93,7 +94,7 @@ function homeNav()
 {
     searchForm.style.display = 'none';
     home.style.display = 'block';
-   document.getElementById("homeNavE").classList.add('active');
+    document.getElementById("homeNavE").classList.add('active');
     document.getElementById("searchNavE").classList.remove('active');
 
 }
@@ -134,6 +135,7 @@ function init()
         loginForm.style.display = 'block';
         logoutForm.style.display = 'none';
         searchForm.style.display = 'none';
+        home.style.display = 'none';
         document.getElementById("navbar").style.display = 'none';
     }
 }
