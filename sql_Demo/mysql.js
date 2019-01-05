@@ -29,4 +29,10 @@ console.log(mysql.format(sql4,["users","admin"]))
 console.log(mysql.format(sql4,["users","admin ' "]))
 // SELECT * from `users` where username = 'admin'
 // SELECT * from `users` where username = 'admin \' '
-mysql.cr
+
+let db = mysql.createConnection(/* con details */);
+db.query("SELECT * from ?? where username = ?", ["users", "admin"], () => { /* do something */ });
+// query => SELECT * from `users` where username = 'admin'
+
+db.query("SELECT * from ?? where username = ?", ["users ' ", "admin ' "], () => { /* do something */ });
+// query => SELECT * from `users ' ` where username = 'admin \' '
