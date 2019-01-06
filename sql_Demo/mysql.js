@@ -2,7 +2,7 @@ let mysql = require("mysql");
 
 let sql = "SELECT * from users where username = ";
 let value1_1 = mysql.escape("admin");
-let value1_2 = mysql.escape("admin ' or 1 = '1 -- ");
+let value1_2 = mysql.escape("admin ' ");
 console.log(sql + value1_1)
 console.log(sql + value1_2)
 // SELECT * from users where username = 'admin'
@@ -37,3 +37,8 @@ db.query("SELECT * from ?? where username = ?", ["users", "admin"], () => { /* d
 
 db.query("SELECT * from ?? where username = ?", ["users `Test ", "admin ' "], () => { /* do something */ });
 // query => SELECT * from `users ``Test ` where username = 'admin \' '
+
+
+let sql2 = "SELECT * from users where username = ";
+let value2_1 = "admin ' ";
+console.log(sql2 + value2_1)
