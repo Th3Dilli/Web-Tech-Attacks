@@ -21,9 +21,7 @@ use wt_attacks;
 
 create user 'wt_attacks_root'@'localhost' identified by 'pass1234';
 grant all PRIVILEGES on wt_attacks.* to 'wt_attacks_root'@'localhost';
---
--- Table structure for table `users`
---ADD COLUMN `token` VARCHAR(45) NULL AFTER `password`;
+
 
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -44,7 +42,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'dilli','12345'),(2,'admin','admin'),(3,'markus','password');
+INSERT INTO `users` VALUES (1,'dilli','12345',NULL),(2,'admin','admin',NULL),(3,'markus','password',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
