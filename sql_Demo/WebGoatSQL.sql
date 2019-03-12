@@ -12,7 +12,7 @@ case when exists(select ip from servers where hostname = 'webgoat-prd' AND subst
 -- Server Response with the query when query failed
 
 -- user lacks privilege or object not found: TABLENAME in statement 
- select id, hostname, ip, mac, status, description from servers  where status &lt;&gt; &#39;out of order&#39; order by tablename
+ select id, hostname, ip, mac, status, description from servers  where status &lt;&gt; &#39;out of order&#39; order by ips
 
 
 
